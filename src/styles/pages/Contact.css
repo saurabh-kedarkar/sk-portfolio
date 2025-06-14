@@ -1,0 +1,467 @@
+.contact-container {
+  min-height: 100vh;
+  padding: 6rem 2rem 2rem;
+}
+
+.contact-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.contact-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 0;
+}
+
+.info-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  /* color: var(--primary-color); */
+  background: linear-gradient(180deg, #fff, var(--primary-color));
+  /* margin-bottom: 1rem;
+    font-size: 1.5rem; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.5rem 0 1rem;
+  font-size: 0.95rem;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.contact-action-btn {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  color: white;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-action-btn i {
+  font-size: 1.2rem;
+}
+
+.contact-action-btn span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.contact-action-btn.whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+.contact-action-btn.whatsapp:hover {
+  background: linear-gradient(135deg, #128c7e, #075e54);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.contact-action-btn.telegram {
+  background: linear-gradient(135deg, #0088cc, #0077b3);
+}
+
+.contact-action-btn.telegram:hover {
+  background: linear-gradient(135deg, #0077b3, #005580);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.contact-form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: max-content;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #ff4757;
+  background: rgba(255, 71, 87, 0.05);
+}
+
+.error-message {
+  color: #ff4757;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1.2rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.submit-btn {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.2);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  background: var(--primary-color); /* Darker shade of accent color */
+  opacity: 0.7;
+}
+
+.Toastify__toast {
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.Toastify__toast-body {
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.Toastify__progress-bar {
+  height: 3px;
+}
+
+.chat-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.chat-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  justify-content: center;
+}
+
+.chat-button i {
+  font-size: 2rem;
+}
+
+.chat-button span {
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.chat-button.whatsapp {
+  background-color: #25d366;
+  color: white;
+  flex: 1;
+  max-width: 300px;
+}
+
+.chat-button.whatsapp:hover {
+  background-color: #1fba58;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+  transform: translateY(-2px);
+}
+
+.chat-button.telegram {
+  background-color: #0088cc;
+  color: white;
+  flex: 1;
+  max-width: 300px;
+}
+
+.chat-button.telegram:hover {
+  background-color: #0077b3;
+  box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Responsive styles for chat buttons */
+@media screen and (max-width: 768px) {
+  .chat-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin: 2rem 1rem;
+  }
+
+  .chat-button {
+    width: 100%;
+    max-width: none;
+    padding: 1.2rem;
+  }
+
+  .chat-button i {
+    font-size: 1.8rem;
+  }
+
+  .chat-button span {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chat-button {
+    padding: 1rem;
+  }
+
+  .chat-button i {
+    font-size: 1.6rem;
+  }
+
+  .chat-button span {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contact-action-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contact-action-btn i {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .info-card {
+    padding: 1.25rem;
+  }
+
+  .contact-action-btn {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .contact-action-btn i {
+    font-size: 1.1rem;
+  }
+
+  .contact-action-btn span {
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Light Theme */
+.light .subtitle {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.light .info-card,
+.light .contact-form {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light .info-card p {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.light .social-icon {
+  background: rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+}
+
+.light .social-icon:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.light .form-group input,
+.light .form-group textarea {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+}
+
+.light .form-group input:focus,
+.light .form-group textarea:focus {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 4rem 1rem 1rem;
+  }
+
+  .contact-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info {
+    gap: 1rem;
+  }
+
+  .info-card {
+    padding: 1rem;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
+}

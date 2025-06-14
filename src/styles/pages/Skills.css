@@ -1,0 +1,125 @@
+.skills-container {
+  min-height: 100vh;
+  padding: 6rem 2rem 2rem;
+}
+
+.skills-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skills-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.skills-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.skill-category {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-category h2 {
+  /* color: var(--primary-color); */
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  background: linear-gradient(180deg, #fff, var(--primary-color));
+  /* margin-bottom: 1rem;
+  font-size: 1.5rem; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill-item {
+  width: 100%;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.skill-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.skill-level {
+  color: var(--primary-color);
+}
+
+.skill-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 4px;
+  transition: width 1s ease-in-out;
+}
+
+/* Light Theme */
+.light .subtitle {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.light .skill-category {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light .skill-name {
+  color: #0f172a;
+}
+
+.light .skill-bar {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .skills-container {
+    padding: 4rem 1rem 1rem;
+  }
+
+  .skills-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .skill-category {
+    padding: 1.5rem;
+  }
+}

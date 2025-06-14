@@ -1,0 +1,25 @@
+{
+  "short_name": "Sk Portfolio",
+  "name": "Sk Portfolio",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dnvmzutlo/image/upload/v1735191319/sk-logo_xqas3i.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://res.cloudinary.com/dnvmzutlo/image/upload/v1735191319/sk-logo_xqas3i.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://res.cloudinary.com/dnvmzutlo/image/upload/v1735191319/sk-logo_xqas3i.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
