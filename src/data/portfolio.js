@@ -29,7 +29,7 @@ export const socialLinks = [
     icon: <FaInstagram size={20} />,
   },
   {
-    url: "https://www.linkedin.com/in/saurabhk2812/",
+    url: "https://www.linkedin.com/in/saurabh-kedarkar/",
     icon: <FaLinkedinIn size={20} />,
   },
   {
