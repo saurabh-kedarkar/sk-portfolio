@@ -32,6 +32,16 @@ export const projectsInfo = {
       githubLink: "",
     },
     {
+      title: "agentvers",
+      description:
+        "Discover our curated selection of AI agents and create your digital team effortlessly in no time.",
+      image:
+        "https://res.cloudinary.com/dqlvyzz4i/image/upload/v1750041714/agent_verse_akl6v9.png",
+      tags: ["Wordpress", "API", "NextJS", "Tailwind CSS", "mySQL"],
+      liveLink: "https://www.agentvers.ai/",
+      githubLink: "",
+    },
+    {
       title: "RR kabel",
       description:
         "RR Kabel | Leading Wire & Cable Manufacturer Company in India",
