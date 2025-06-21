@@ -15,6 +15,7 @@ import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import { socialLinks, portfolioInfo } from "../data/portfolio";
 import ContactUser from "./pages/ContactUser";
+import Blog from "./pages/Blog";
 import NotFound from "./NotFound";
 
 const pageVariants = {
@@ -323,6 +324,19 @@ const AppContent = () => {
             }
           />
           <Route
+            path="/blog"
+            element={
+              <motion.div
+                initial="initial"
+                animate="enter"
+                exit="exit"
+                variants={pageVariants}
+              >
+                <Blog />
+              </motion.div>
+            }
+          />
+          <Route
             path="/get-contact"
             element={
               <motion.div
@@ -357,6 +371,7 @@ const Navigation = () => {
           { path: "/skills", icon: "💻", text: "Skills" },
           { path: "/projects", icon: "🎯", text: "Projects" },
           { path: "/contact", icon: "✉️", text: "Contact" },
+          { path: "/blog", icon: "📡", text: "Blog" },  
         ].map((item, index) => (
           <motion.div
             key={item.path}

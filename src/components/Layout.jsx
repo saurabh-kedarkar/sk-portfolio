@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import '../styles/Layout.css';
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import "../styles/Layout.css";
 
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [accentColor, setAccentColor] = useState('#0066ff');
+  const [accentColor, setAccentColor] = useState("#0066ff");
   const location = useLocation();
 
   const navLinks = [
-    { to: '/', icon: 'fas fa-home' },
-    { to: '/about', icon: 'fas fa-user' },
-    { to: '/skills', icon: 'fas fa-code' },
-    { to: '/projects', icon: 'fas fa-project-diagram' },
-    { to: '/contact', icon: 'fas fa-envelope' }
+    { to: "/", icon: "fas fa-home" },
+    { to: "/about", icon: "fas fa-user" },
+    { to: "/skills", icon: "fas fa-code" },
+    { to: "/projects", icon: "fas fa-project-diagram" },
+    { to: "/contact", icon: "fas fa-envelope" },
+    { to: "/blog", icon: "fas fa-envelope" },
   ];
 
   const colorOptions = [
-    '#0066ff',
-    '#9400d3',
-    '#ff8c00',
-    '#00c853',
-    '#ff4081',
-    '#00bcd4'
+    "#0066ff",
+    "#9400d3",
+    "#ff8c00",
+    "#00c853",
+    "#ff4081",
+    "#00bcd4",
   ];
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--accent-color', accentColor);
-    document.body.className = isDarkMode ? 'dark' : 'light';
+    document.documentElement.style.setProperty("--accent-color", accentColor);
+    document.body.className = isDarkMode ? "dark" : "light";
   }, [isDarkMode, accentColor]);
 
   useEffect(() => {
@@ -47,19 +48,22 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className={`layout ${isDarkMode ? 'dark' : 'light'}`}>
+    <div className={`layout ${isDarkMode ? "dark" : "light"}`}>
       {/* Mobile Menu Toggle */}
       <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-        <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        <i className={`fas ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`}></i>
       </button>
 
       {/* Settings Toggle */}
-      <button className="settings-toggle" onClick={() => setIsSettingsOpen(!isSettingsOpen)}>
+      <button
+        className="settings-toggle"
+        onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+      >
         <i className="fas fa-cog"></i>
       </button>
 
       {/* Side Menu */}
-      <nav className={`side-menu ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+      <nav className={`side-menu ${isMobileMenuOpen ? "mobile-open" : ""}`}>
         <div className="profile-section">
           <img
             src="/profile-image.jpg"
@@ -72,7 +76,9 @@ const Layout = ({ children }) => {
             <NavLink
               key={link.to}
               to={link.to}
-              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <i className={link.icon}></i>
@@ -92,7 +98,7 @@ const Layout = ({ children }) => {
               exit={{ opacity: 0, y: -20 }}
               transition={{
                 duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
+                ease: [0.4, 0, 0.2, 1],
               }}
             >
               {children}
@@ -124,14 +130,14 @@ const Layout = ({ children }) => {
                 </h4>
                 <div className="theme-options">
                   <button
-                    className={`theme-option ${!isDarkMode ? 'active' : ''}`}
+                    className={`theme-option ${!isDarkMode ? "active" : ""}`}
                     onClick={() => setIsDarkMode(false)}
                   >
                     <i className="fas fa-sun"></i>
                     Light
                   </button>
                   <button
-                    className={`theme-option ${isDarkMode ? 'active' : ''}`}
+                    className={`theme-option ${isDarkMode ? "active" : ""}`}
                     onClick={() => setIsDarkMode(true)}
                   >
                     <i className="fas fa-moon"></i>
@@ -149,7 +155,9 @@ const Layout = ({ children }) => {
                   {colorOptions.map((color) => (
                     <button
                       key={color}
-                      className={`color-option ${accentColor === color ? 'active' : ''}`}
+                      className={`color-option ${
+                        accentColor === color ? "active" : ""
+                      }`}
                       style={{ background: color }}
                       onClick={() => setAccentColor(color)}
                       aria-label={`Set accent color to ${color}`}
