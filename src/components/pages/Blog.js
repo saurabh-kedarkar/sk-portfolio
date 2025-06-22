@@ -14,7 +14,7 @@ const Blog = () => {
 
   const API_KEY = "0a553c4f7bb6414ba8e037c0e2b5705f";
   const BASE_URL = "https://newsapi.org/v2";
-
+  //  blog page useEffect used
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
