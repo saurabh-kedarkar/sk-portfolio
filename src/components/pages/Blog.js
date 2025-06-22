@@ -31,6 +31,7 @@ const Blog = () => {
           // default
           endpoint = `${BASE_URL}/top-headlines?language=en&apiKey=${API_KEY}`;
         }
+        console.log("base url :", BASE_URL);
 
         const response = await fetch(endpoint, {
           headers: {
