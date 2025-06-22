@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import NewsDetailModal from "./NewsDetailModal";
-import SkeletonCard from "./SkeletonCard"; // Import the skeleton component
+import SkeletonCard from "./SkeletonCard";
 import "../../styles/pages/Blog.css";
 
 const Blog = () => {
@@ -12,34 +12,29 @@ const Blog = () => {
   const [visibleCount, setVisibleCount] = useState(6);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  //   const API_KEY = "0a553c4f7bb6414ba8e037c0e2b5705f";
   const API_KEY = process.env.REACT_APP_BLOG_API_KEY;
-  const BASE_URL = "https://newsapi.org/v2";
-  //  blog page useEffect used
+  const BASE_URL = "https://gnews.io/api/v4";
+
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
       try {
         let endpoint = "";
+
         if (activeCategory === "technology") {
-          endpoint = `${BASE_URL}/top-headlines?category=technology&language=en&apiKey=${API_KEY}`;
+          endpoint = `${BASE_URL}/top-headlines?category=technology&lang=en&token=${API_KEY}`;
         } else if (activeCategory === "ai") {
-          endpoint = `${BASE_URL}/everything?q=artificial%20intelligence&language=en&apiKey=${API_KEY}`;
+          endpoint = `${BASE_URL}/search?q=artificial+intelligence&lang=en&token=${API_KEY}`;
         } else if (activeCategory === "sports") {
-          endpoint = `${BASE_URL}/top-headlines?category=sports&language=en&apiKey=${API_KEY}`;
+          endpoint = `${BASE_URL}/top-headlines?category=sports&lang=en&token=${API_KEY}`;
+        } else if (activeCategory === "india") {
+          endpoint = `${BASE_URL}/search?q=India&lang=en&token=${API_KEY}`;
         } else {
-          // default
-          endpoint = `${BASE_URL}/top-headlines?language=en&apiKey=${API_KEY}`;
+          // all news (default)
+          endpoint = `${BASE_URL}/top-headlines?lang=en&token=${API_KEY}`;
         }
-        console.log("base url :", BASE_URL);
 
-        const response = await fetch(endpoint, {
-          headers: {
-            "User-Agent": "Mozilla/5.0", // Important for some APIs
-            Accept: "application/json",
-          },
-        });
-
+        const response = await fetch(endpoint);
         const data = await response.json();
         setArticles(data.articles || []);
       } catch (error) {
@@ -63,7 +58,7 @@ const Blog = () => {
   const visibleArticles = filteredArticles.slice(0, visibleCount);
 
   return (
-    <div className={`blog-page`}>
+    <div className="blog-page">
       <header className="header">
         <h1>News Portal</h1>
         <div className="search-bar">
@@ -76,38 +71,17 @@ const Blog = () => {
           />
         </div>
         <div className="category-buttons">
-          <button
-            onClick={() => setActiveCategory("all")}
-            className={`category-button ${
-              activeCategory === "all" ? "active" : ""
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setActiveCategory("technology")}
-            className={`category-button ${
-              activeCategory === "technology" ? "active" : ""
-            }`}
-          >
-            Technology
-          </button>
-          <button
-            onClick={() => setActiveCategory("ai")}
-            className={`category-button ${
-              activeCategory === "ai" ? "active" : ""
-            }`}
-          >
-            AI
-          </button>
-          <button
-            onClick={() => setActiveCategory("sports")}
-            className={`category-button ${
-              activeCategory === "sports" ? "active" : ""
-            }`}
-          >
-            Sports
-          </button>
+          {["all", "india", "technology", "ai", "sports"].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`category-button ${
+                activeCategory === cat ? "active" : ""
+              }`}
+            >
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </button>
+          ))}
         </div>
       </header>
 
@@ -123,7 +97,7 @@ const Blog = () => {
                 onClick={() => setSelectedArticle(article)}
               >
                 <img
-                  src={article.urlToImage ?? "https://placehold.co/600x400"}
+                  src={article.image ?? "https://placehold.co/600x400"}
                   alt={article.title}
                 />
                 <h3>{article.title.split(" ").slice(0, 4).join(" ")}</h3>
