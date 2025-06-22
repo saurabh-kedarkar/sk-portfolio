@@ -12,7 +12,8 @@ const Blog = () => {
   const [visibleCount, setVisibleCount] = useState(6);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const API_KEY = "0a553c4f7bb6414ba8e037c0e2b5705f";
+  //   const API_KEY = "0a553c4f7bb6414ba8e037c0e2b5705f";
+  const API_KEY = process.env.REACT_APP_BLOG_API_KEY;
   const BASE_URL = "https://newsapi.org/v2";
   //  blog page useEffect used
   useEffect(() => {
