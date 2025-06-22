@@ -20,19 +20,25 @@ const Blog = () => {
     const fetchNews = async () => {
       setLoading(true);
       try {
-        let endpoint = "top-headlines?language=en";
+        let endpoint = "";
         if (activeCategory === "technology") {
-          endpoint = "top-headlines?category=technology";
+          endpoint = `${BASE_URL}/top-headlines?category=technology&language=en&apiKey=${API_KEY}`;
         } else if (activeCategory === "ai") {
-          endpoint = "everything?q=artificial%20intelligence&language=en";
+          endpoint = `${BASE_URL}/everything?q=artificial%20intelligence&language=en&apiKey=${API_KEY}`;
         } else if (activeCategory === "sports") {
-          console.log("india");
-          endpoint = "top-headlines?category=sports";
+          endpoint = `${BASE_URL}/top-headlines?category=sports&language=en&apiKey=${API_KEY}`;
+        } else {
+          // default
+          endpoint = `${BASE_URL}/top-headlines?language=en&apiKey=${API_KEY}`;
         }
 
-        const response = await fetch(
-          `${BASE_URL}/${endpoint}&apiKey=${API_KEY}`
-        );
+        const response = await fetch(endpoint, {
+          headers: {
+            "User-Agent": "Mozilla/5.0", // Important for some APIs
+            Accept: "application/json",
+          },
+        });
+
         const data = await response.json();
         setArticles(data.articles || []);
       } catch (error) {
