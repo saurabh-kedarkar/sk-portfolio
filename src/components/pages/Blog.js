@@ -36,7 +36,12 @@ const Blog = () => {
 
         const response = await fetch(endpoint);
         const data = await response.json();
-        setArticles(data.articles || []);
+
+        if (data.errors) {
+          setArticles([]);
+        } else {
+          setArticles(data.articles || []);
+        }
       } catch (error) {
         console.error("Error fetching news:", error);
       } finally {
@@ -97,7 +102,11 @@ const Blog = () => {
                 onClick={() => setSelectedArticle(article)}
               >
                 <img
-                  src={article.image ?? "https://placehold.co/600x400"}
+                  src={
+                    article.image
+                      ? article.image
+                      : "https://placehold.co/600x400"
+                  }
                   alt={article.title}
                 />
                 <h3>{article.title.split(" ").slice(0, 4).join(" ")}</h3>
