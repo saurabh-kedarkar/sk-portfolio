@@ -369,9 +369,9 @@ const Navigation = () => {
           { path: "/", icon: "🏠", text: "Home" },
           { path: "/about", icon: "👤", text: "About" },
           { path: "/skills", icon: "💻", text: "Skills" },
-          { path: "/projects", icon: "🎯", text: "Projects" },
+          // { path: "/projects", icon: "🎯", text: "Projects" },
           { path: "/contact", icon: "✉️", text: "Contact" },
-          { path: "/blog", icon: "📡", text: "Blog" },  
+          { path: "/blog", icon: "📡", text: "Blog" },
         ].map((item, index) => (
           <motion.div
             key={item.path}
