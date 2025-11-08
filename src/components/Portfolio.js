@@ -68,7 +68,7 @@ const MainContent = ({ selectedColor }) => {
           >
             {/* <img src="https://mavi.avstechnolabs.com/static/media/simple.9340dbb8700266806d00.jpg" alt="Profile" /> */}
             <img
-              src="https://res.cloudinary.com/dqlvyzz4i/image/upload/v1734109435/hlnprouoif2nfziinxdj.jpg"
+              src="https://res.cloudinary.com/dqlvyzz4i/image/upload/v1762356770/WhatsApp_Image_2025-11-05_at_15.31.51_cf9d4bb9_aho1lg.jpg"
               alt="Profile"
             />
           </motion.div>
