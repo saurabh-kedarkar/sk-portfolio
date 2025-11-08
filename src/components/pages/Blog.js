@@ -12,7 +12,8 @@ const Blog = () => {
   const [visibleCount, setVisibleCount] = useState(6);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const API_KEY = process.env.REACT_APP_BLOG_API_KEY;
+  const API_KEY =
+    process.env.REACT_APP_BLOG_API_KEY || "d88c50a23daef389c3b3e44909233479";
   const BASE_URL = "https://gnews.io/api/v4";
 
   useEffect(() => {
