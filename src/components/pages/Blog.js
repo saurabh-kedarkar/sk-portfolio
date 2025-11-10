@@ -11,6 +11,36 @@ const BASE_URL = "https://gnews.io/api/v4";
 // Dummy fallback articles shown when there's no API key or fetching fails
 const DUMMY_ARTICLES = [
   {
+    title: "Nvidia’s Reign Invites Disruption and an Open-Source Future",
+    description:
+      "The tech narrative often dictates market reality, and the sheer velocity of Nvidia’s ascent is both dazzling and deeply precarious",
+    image:
+      "https://www.technewsworld.com/wp-content/uploads/sites/3/2025/11/Nvidia-competition.jpg",
+    url: "https://www.technewsworld.com/story/nvidias-reign-invites-disruption-and-an-open-source-future-180003.html",
+    publishedAt: "2025-11-10T08:00:00Z",
+    source: { name: "tech" },
+  },
+  {
+    title: "Red Hat’s Evolution: How a Subsidiary Became an AI Powerhouse",
+    description:
+      "Red Hat has become a foundational player in enterprise AI by combining open-source infrastructure with hybrid cloud flexibility, maintaining independence while leveraging IBM’s global scale",
+    image:
+      "https://www.technewsworld.com/wp-content/uploads/sites/3/2025/11/Red-Hat-AI.jpg",
+    url: "https://www.technewsworld.com/story/red-hats-evolution-how-a-subsidiary-became-an-ai-powerhouse-177607.html",
+    publishedAt: "2025-11-10T08:00:00Z",
+    source: { name: "ai" },
+  },
+  {
+    title: "Why ‘AI Leapers’ Are Failing Sales and CRM Teams",
+    description:
+      "Sales organizations are racing to embrace artificial intelligence (AI) to sharpen customer engagement and boost performance, but many are discovering that enthusiasm alone doesn’t guarantee results",
+    image:
+      "https://www.crmbuyer.com/wp-content/uploads/sites/4/2025/10/AI-failing-sales-teams.jpg",
+    url: "https://www.crmbuyer.com/story/why-ai-leapers-are-failing-sales-and-crm-teams-177546.html?__hstc=8228397.3c296133b2817f8a573df15574f7e062.1762791422229.1762791422229.1762791422229.1&__hssc=8228397.3.1762791422229&__hsfp=3971047545",
+    publishedAt: "2025-11-10T08:00:00Z",
+    source: { name: "ai" },
+  },
+  {
     title: "Local developer community hosts hands-on React workshop",
     description:
       "More than 100 developers attended a hands-on React workshop focused on hooks and state management.",
@@ -126,7 +156,7 @@ const Blog = () => {
   return (
     <div className="blog-page">
       <header className="header">
-        <h1>News Portal</h1>
+        <h1>Blog Portal</h1>
         <div className="search-bar">
           <input
             type="text"
