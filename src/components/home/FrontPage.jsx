@@ -22,6 +22,7 @@ import ScrambleText from "../common/ScrambleText";
 import Interactive3DCard from "../common/Interactive3DCard";
 import "./FrontPage.css";
 
+// sk code
 const FrontPage = ({ selectedColor }) => {
   // Roles Rotator
   const [roleIndex, setRoleIndex] = useState(0);
@@ -102,7 +103,11 @@ const FrontPage = ({ selectedColor }) => {
 
               {/* Editorial Bio Lead */}
               <p className="home-lead-manifesto">
-                3+ years of production engineering at <strong>Yudiz Solutions Ltd.</strong> Architecting scalable WordPress ecosystems, custom Gutenberg integrations, React platforms, and cutting-edge web applications with 40%+ Core Web Vitals speed acceleration.
+                3+ years of production engineering at{" "}
+                <strong>Yudiz Solutions Ltd.</strong> Architecting scalable
+                WordPress ecosystems, custom Gutenberg integrations, React
+                platforms, and cutting-edge web applications with 40%+ Core Web
+                Vitals speed acceleration.
               </p>
 
               {/* 4 Compact Telemetry HUD Metric Pills */}
@@ -250,7 +255,11 @@ const FrontPage = ({ selectedColor }) => {
               className="home-hologram-column"
               initial={{ opacity: 0, scale: 0.94, x: 25 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              transition={{
+                duration: 0.7,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.1,
+              }}
             >
               <div className="hologram-stage-anchor">
                 {/* Ambient Aura Halo */}
@@ -265,7 +274,11 @@ const FrontPage = ({ selectedColor }) => {
                 <motion.div
                   className="orbit-floating-badge orb-tr"
                   animate={{ y: [-6, 6, -6] }}
-                  transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 4.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   <SiReact style={{ color: "#61dafb" }} />
                   <span>React 18</span>
@@ -274,7 +287,12 @@ const FrontPage = ({ selectedColor }) => {
                 <motion.div
                   className="orbit-floating-badge orb-bl"
                   animate={{ y: [6, -6, 6] }}
-                  transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                  transition={{
+                    duration: 4.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.8,
+                  }}
                 >
                   <SiWordpress style={{ color: "#21759b" }} />
                   <span>WordPress Core</span>
@@ -283,7 +301,12 @@ const FrontPage = ({ selectedColor }) => {
                 <motion.div
                   className="orbit-floating-badge orb-br"
                   animate={{ y: [-5, 5, -5] }}
-                  transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
+                  transition={{
+                    duration: 5.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1.6,
+                  }}
                 >
                   <SiNodedotjs style={{ color: "#68a063" }} />
                   <span>Node.js</span>
@@ -297,10 +320,22 @@ const FrontPage = ({ selectedColor }) => {
                 >
                   <div className="identity-glass-card interactive">
                     {/* Cyber Frame Corner Brackets */}
-                    <div className="cyber-bracket top-left" style={{ borderColor: selectedColor }} />
-                    <div className="cyber-bracket top-right" style={{ borderColor: selectedColor }} />
-                    <div className="cyber-bracket bottom-left" style={{ borderColor: selectedColor }} />
-                    <div className="cyber-bracket bottom-right" style={{ borderColor: selectedColor }} />
+                    <div
+                      className="cyber-bracket top-left"
+                      style={{ borderColor: selectedColor }}
+                    />
+                    <div
+                      className="cyber-bracket top-right"
+                      style={{ borderColor: selectedColor }}
+                    />
+                    <div
+                      className="cyber-bracket bottom-left"
+                      style={{ borderColor: selectedColor }}
+                    />
+                    <div
+                      className="cyber-bracket bottom-right"
+                      style={{ borderColor: selectedColor }}
+                    />
 
                     {/* Image Box with Laser Scan Beam */}
                     <div className="identity-photo-box">
