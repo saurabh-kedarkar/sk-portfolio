@@ -1,0 +1,283 @@
+/* ==========================================================================
+   TOP FLOATING NAV (Desktop Bento vCard Architecture)
+   ========================================================================== */
+
+.vcard-top-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  position: relative;
+  z-index: 50;
+}
+
+/* Floating System Controls (Top Right Corner) */
+.vcard-system-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.system-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.system-circle-btn:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Command Palette Trigger */
+.cmd-palette-trigger .cmd-symbol {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+/* Palette Popover Anchor */
+.palette-orb-anchor {
+  position: relative;
+}
+
+.color-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+/* Enhanced Theme & Cursor Settings Popup Card */
+.palette-popup-card {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 280px;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-highlight);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.popover-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.auto-daily-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: rgba(var(--primary-rgb), 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
+  color: var(--primary-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auto-daily-badge:hover,
+.auto-daily-badge.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.palette-grid {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.palette-chip {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.palette-chip:hover {
+  transform: scale(1.2);
+}
+
+.palette-chip.active-chip {
+  border-color: #ffffff;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.popover-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  width: 100%;
+}
+
+/* Cursor Options Grid */
+.cursor-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+}
+
+.cursor-option-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cursor-option-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-color: var(--border-highlight);
+}
+
+.cursor-option-btn.active {
+  background: rgba(var(--primary-rgb), 0.18);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.2);
+}
+
+.cursor-option-btn svg {
+  font-size: 1rem;
+}
+
+/* Floating Main Tabs Bar */
+.vcard-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 0.65rem;
+  box-shadow: var(--glass-shadow);
+  max-width: 100%;
+}
+
+/* Individual Tab Button */
+.vcard-tab-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: 78px;
+  height: 72px;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  user-select: none;
+}
+
+.vcard-tab-item:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.vcard-tab-item.active {
+  color: #ffffff;
+}
+
+.vcard-tab-item.active .tab-icon,
+.vcard-tab-item.active .tab-label {
+  color: #ffffff !important;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+}
+
+.tab-icon {
+  font-size: 1.35rem;
+  transition: transform 0.25s ease;
+}
+
+.vcard-tab-item:hover .tab-icon {
+  transform: scale(1.1);
+}
+
+.tab-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.active-tab-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+.active-tab-top-glow {
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Hide desktop upper floating nav wrapper on mobile devices */
+@media (max-width: 768px) {
+  .vcard-top-nav-wrapper {
+    display: none !important;
+  }
+}

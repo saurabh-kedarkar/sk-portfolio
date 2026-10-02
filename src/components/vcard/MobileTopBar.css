@@ -1,0 +1,149 @@
+/* ==========================================================================
+   MOBILE TOP HEADER BAR
+   Dedicated top bar for mobile devices (<= 768px)
+   ========================================================================== */
+
+.mobile-top-header {
+  display: none;
+  width: 100%;
+  height: 60px;
+  min-height: 60px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 800;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.15rem;
+  background: var(--bg-surface);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .mobile-top-header {
+    display: flex;
+  }
+}
+
+/* Brand Identity Pill */
+.mobile-brand-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-monogram-box {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.brand-pulse-pip {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 1.5px solid var(--bg-deep);
+  box-shadow: 0 0 6px #10b981;
+  animation: pulseLiveBeacon 1.8s infinite;
+}
+
+/* System Action Controls */
+.mobile-system-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-control-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.mobile-control-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-highlight);
+}
+
+.mobile-cmd-txt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.mobile-palette-anchor {
+  position: relative;
+}
+
+.mobile-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.mobile-palette-pop {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: -20px;
+  width: 260px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border-highlight);
+  border-radius: 16px;
+  padding: 0.85rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobile-palette-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mobile-palette-chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.mobile-palette-chip.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 8px currentColor;
+}

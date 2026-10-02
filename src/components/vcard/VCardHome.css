@@ -1,0 +1,455 @@
+/* ==========================================================================
+   VCARD HOME / ABOUT ME STAGE
+   ========================================================================== */
+
+.vcard-home-page {
+  width: 100%;
+}
+
+/* Section Title with Decorative Line (from screenshot) */
+.vcard-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.vcard-page-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.title-decorative-line {
+  height: 3px;
+  width: 150px;
+  border-radius: 3px;
+}
+
+/* Biography Text */
+.vcard-bio-block {
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.bio-lead-text,
+.bio-sub-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.bio-lead-text strong,
+.bio-sub-text strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+/* What I Do Section */
+.vcard-what-i-do-section {
+  margin-bottom: 2.5rem;
+}
+
+.what-i-do-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.service-card-3d-wrap {
+  display: flex;
+  height: 100%;
+}
+
+.service-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.15rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 1.4rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-box:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+}
+
+.service-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.wp-color { color: #21759b; }
+.react-color { color: #61dafb; }
+.zap-color { color: #10b981; }
+.cpu-color { color: #8b5cf6; }
+
+.service-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 0.4rem 0;
+}
+
+.service-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Key Impact Metrics */
+.vcard-metrics-section {
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.vcard-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.vcard-metric-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.15rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  transition: all 0.25s ease;
+}
+
+.vcard-metric-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.metric-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: block;
+  line-height: 1.1;
+}
+
+.metric-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   NEW FEATURE: CAREER READINESS & AVAILABILITY MATRIX
+   ========================================================================== */
+.vcard-availability-section {
+  margin-bottom: 2.5rem;
+}
+
+.availability-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.avail-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.avail-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+}
+
+.avail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.avail-pulse-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseLiveBeacon 1.6s infinite;
+}
+
+.avail-icon {
+  font-size: 0.95rem;
+}
+
+.avail-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+.avail-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 0.25rem 0;
+}
+
+.avail-sub {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Engineering Pillars Section */
+.vcard-pillars-section {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.vcard-pillars-section .pillars-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.pillar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.35rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillar-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-highlight);
+  transform: translateY(-3px);
+}
+
+.pillar-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.pillar-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.pillar-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin: 0 0 0.45rem 0;
+}
+
+.pillar-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (Mobile & Tablet)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .vcard-pillars-section .pillars-grid,
+  .pillars-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .services-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .vcard-metrics-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .availability-bento-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .vcard-section-title-wrap {
+    gap: 1rem;
+  }
+  .vcard-page-title {
+    font-size: 1.8rem;
+  }
+  .title-decorative-line {
+    width: 60px;
+  }
+  .vcard-metrics-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.65rem;
+  }
+  .vcard-metric-card {
+    padding: 0.75rem 0.85rem;
+  }
+  .metric-num {
+    font-size: 1.1rem;
+  }
+  .metric-lbl {
+    font-size: 0.62rem;
+  }
+  .pillar-item {
+    padding: 1.15rem 1rem;
+  }
+  .pillar-title {
+    font-size: 1rem;
+  }
+  .pillar-desc {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .vcard-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==========================================================================
+   INTERESTS GRID SECTION (Matching Screenshot)
+   ========================================================================== */
+.vcard-interests-section {
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+.vcard-interests-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.interest-card-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.95rem 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.interest-card-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -6px var(--primary-glow);
+}
+
+.interest-emoji {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.interest-label {
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+  .vcard-interests-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .vcard-interests-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .interest-card-pill {
+    padding: 0.8rem 0.9rem;
+    font-size: 0.88rem;
+  }
+}

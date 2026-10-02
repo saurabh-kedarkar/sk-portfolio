@@ -1,34 +1,83 @@
-.not-found {
+.not-found-viewport {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.not-found-card {
+  max-width: 520px;
+  width: 100%;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-subtle);
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.not-found-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  height: 100vh;
-  /* background-color: #f8f9fa; */
-  color: #fff;
-  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
 }
 
-.not-found h1 {
-  font-size: 96px;
-  margin-bottom: 20px;
-  color: var(--primary-color);
+.not-found-code {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--text-main) 40%, var(--primary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.not-found p {
-  font-size: 24px;
-  margin-bottom: 30px;
+.not-found-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
 }
 
-.not-found a {
+.not-found-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.not-found-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.8rem;
+  background: var(--primary-color);
+  color: #ffffff !important;
+  border-radius: 14px;
   text-decoration: none;
-  color: #fff;
-  background-color: var(--primary-color);
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 18px var(--primary-glow);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.not-found a:hover {
-  opacity: 0.8;
+.not-found-home-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }

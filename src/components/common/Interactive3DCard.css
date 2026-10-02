@@ -1,0 +1,16 @@
+.interactive-3d-card {
+  position: relative;
+  transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-glare-effect {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}

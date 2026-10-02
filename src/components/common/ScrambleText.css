@@ -1,0 +1,7 @@
+.scramble-text-wrapper {
+  display: inline-block;
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: inherit;
+  transition: color 0.2s ease;
+}

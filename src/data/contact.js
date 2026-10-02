@@ -1,21 +1,42 @@
 export const contactInfo = {
-   title: "Contact Me",
-   subtitle: "Let's Work Together",
-   contactAddress: [
-      {
-         title: "Location",
-         titleIcon: '📍',
-         subtitle: "Teosa Amravati, Maharashtra"
-      },
-      {
-         title: "Email",
-         titleIcon: '📧',
-         subtitle: "saurabhk2812@gmail.com"
-      },
-      {
-         title: "Phone",
-         titleIcon: '📱',
-         subtitle: "+91 7038933292"
-      },
-   ],
-}
+  title: "Get In Touch",
+  subtitle: "Have a project in mind or looking for an experienced developer? Let's build something extraordinary together.",
+  badge: "05 // REACH OUT",
+  responseGuarantee: "Typically responds within 2-3 hours",
+  timezone: "IST (Indian Standard Time • UTC+5:30)",
+  availability: "Available for Full-time Roles, Remote Contracts & Freelance",
+  contactAddress: [
+    {
+      title: "Direct Email",
+      titleIcon: "📧",
+      value: "saurabhk2812@gmail.com",
+      actionText: "Send an Email",
+      actionUrl: "mailto:saurabhk2812@gmail.com",
+      canCopy: true,
+    },
+    {
+      title: "WhatsApp Chat",
+      titleIcon: "💬",
+      value: "+91 7038933292",
+      actionText: "Instant WhatsApp Chat",
+      actionUrl: "https://wa.me/917038933292",
+      canCopy: true,
+    },
+    {
+      title: "Telegram",
+      titleIcon: "✈️",
+      value: "@Saurabhk2812",
+      actionText: "Chat on Telegram",
+      actionUrl: "https://t.me/Saurabhk2812",
+      canCopy: true,
+    },
+    {
+      title: "Location",
+      titleIcon: "📍",
+      value: "Teosa, Amravati, Maharashtra, India",
+      actionText: "Open in Google Maps",
+      actionUrl: "https://maps.google.com/?q=Teosa,+Amravati,+Maharashtra",
+      canCopy: false,
+    },
+  ],
+};

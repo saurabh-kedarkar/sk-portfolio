@@ -1,0 +1,285 @@
+/* ==========================================================================
+   BENTO VCARD MASTER LAYOUT
+   Proven sticky sidebar pattern — scroll container is .portfolio-container
+   ========================================================================== */
+
+/* ─── DESKTOP LAYOUT (>960px) ───────────────────────────────────────────── */
+
+/* The scroll container: full-viewport height, scrolls internally */
+.portfolio-container {
+  height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.vcard-layout-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem 2rem 4rem 2rem;
+}
+
+/* Flex row: left fixed-width | right grows */
+.vcard-layout-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 2.25rem;
+}
+
+/* LEFT COLUMN — sticky inside .portfolio-container scroll context */
+.vcard-left-col {
+  width: 385px;
+  min-width: 385px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  z-index: 40;
+}
+
+/* RIGHT COLUMN — grows to fill */
+.vcard-right-col {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Right Main Content Card */
+.vcard-main-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 600px;
+  background: var(--bg-card);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 28px;
+  padding: 3rem 2.8rem;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vcard-main-card:hover {
+  border-color: var(--border-highlight);
+}
+
+/* ==========================================================================
+   PAGE HEADER STYLING
+   ========================================================================== */
+.page-header-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  /* margin-bottom: 2.25rem; */
+  width: 100%;
+}
+
+.page-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.85rem;
+  background: rgba(var(--primary-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.28);
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.15);
+}
+
+.page-badge-pill svg {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  filter: drop-shadow(0 0 6px var(--primary-glow));
+}
+
+.page-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.1rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0.15rem 0 0.25rem 0;
+}
+
+.page-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 680px;
+}
+
+/* Reset subpage viewports inside vcard main card */
+.vcard-main-card .projects-viewport,
+.vcard-main-card .blog-viewport,
+.vcard-main-card .contact-viewport,
+.vcard-main-card .about-viewport,
+.vcard-main-card .skills-viewport {
+  padding: 0 !important;
+  min-height: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+.vcard-main-card .projects-container,
+.vcard-main-card .blog-container,
+.vcard-main-card .contact-container,
+.vcard-main-card .about-container,
+.vcard-main-card .skills-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  gap: 2rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Page transitions */
+.vcard-page-route-motion {
+  width: 100%;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .vcard-layout-wrapper {
+    padding: 2rem 1.5rem 4rem 1.5rem;
+  }
+  .vcard-left-col {
+    width: 340px;
+    min-width: 340px;
+  }
+  .vcard-main-card {
+    padding: 2.25rem 2rem;
+  }
+}
+
+/* ─── TABLET / MOBILE (≤960px): restore natural page scroll ─────────────── */
+@media (max-width: 960px) {
+
+  /* Restore normal body-level scrolling on mobile */
+  .portfolio-container {
+    height: auto !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+  }
+
+  .vcard-layout-wrapper {
+    padding: 1rem 1rem 3rem 1rem;
+  }
+
+  /* Hide left card on subpages (multi-page mobile pattern) */
+  .vcard-layout-wrapper.subpage-view .vcard-left-col {
+    display: none !important;
+  }
+  .vcard-layout-wrapper.subpage-view {
+    padding-top: 0.75rem !important;
+  }
+
+  .vcard-layout-container {
+    flex-direction: column;
+    max-width: 520px;
+    margin: 0 auto;
+    gap: 1.25rem;
+  }
+
+  .vcard-left-col {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100%;
+    height: auto !important;
+    align-self: auto;
+  }
+
+  .vcard-right-col {
+    width: 100%;
+    flex: none;
+  }
+
+  .vcard-main-card {
+    padding: 2rem 1.5rem;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .vcard-layout-wrapper {
+    padding: 0.5rem 0.85rem calc(95px + env(safe-area-inset-bottom, 16px)) 0.85rem !important;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .vcard-layout-wrapper.subpage-view {
+    padding-top: 0.5rem !important;
+  }
+
+  .vcard-layout-container {
+    width: 100%;
+    max-width: 100%;
+    gap: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .vcard-left-col {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    box-sizing: border-box;
+  }
+
+  .vcard-right-col {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .vcard-main-card {
+    padding: 1.85rem 1.25rem;
+    border-radius: 22px;
+    min-height: auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .vcard-layout-wrapper {
+    padding: 0.25rem 0.65rem calc(90px + env(safe-area-inset-bottom, 16px)) 0.65rem !important;
+  }
+
+  .vcard-main-card {
+    padding: 1.6rem 0.95rem;
+    border-radius: 20px;
+  }
+}

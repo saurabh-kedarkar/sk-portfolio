@@ -1,0 +1,240 @@
+/* VisionOS Cinematic Bottom Floating Dock */
+.cinematic-dock-wrapper {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 900;
+  pointer-events: none;
+}
+
+.cinematic-dock-container {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(10, 15, 26, 0.78);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-dock-container:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.65),
+    0 0 25px rgba(255, 255, 255, 0.04);
+}
+
+.dock-nav-group,
+.dock-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dock-separator {
+  width: 1px;
+  height: 22px;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 0 0.3rem;
+}
+
+/* Individual Dock Button */
+.dock-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-icon {
+  font-size: 1.15rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.dock-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px) scale(1.1);
+}
+
+.dock-btn.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Active Indicator Pip below icon */
+.dock-active-pip {
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* Tooltip on hover */
+.dock-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  padding: 0.35rem 0.65rem;
+  background: rgba(10, 15, 26, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #f8fafc;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dock-btn:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Palette Dot */
+.dock-palette-anchor {
+  position: relative;
+}
+
+.dock-palette-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease;
+}
+
+.dock-btn:hover .dock-palette-dot {
+  transform: scale(1.15);
+}
+
+/* Popup Palette */
+.dock-palette-popup {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  right: -50px;
+  padding: 0.8rem 1rem;
+  background: rgba(10, 15, 26, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.palette-popup-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.palette-colors-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dock-color-orb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-color-orb:hover {
+  transform: scale(1.25);
+}
+
+.dock-color-orb.selected {
+  border-color: #ffffff;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Light Theme overrides for dock */
+[data-theme="light"] .cinematic-dock-container {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .dock-btn {
+  color: #64748b;
+}
+
+[data-theme="light"] .dock-btn:hover {
+  color: #0f172a;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .dock-btn::after {
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+}
+
+[data-theme="light"] .dock-separator {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .cinematic-dock-wrapper {
+    bottom: 12px;
+  }
+  .cinematic-dock-container {
+    padding: 0.35rem 0.45rem;
+    gap: 0.15rem;
+  }
+  .dock-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .dock-icon {
+    font-size: 1rem;
+  }
+  .dock-btn::after {
+    display: none; /* Hide tooltips on touch devices */
+  }
+  .dock-palette-popup {
+    right: -20px;
+  }
+}

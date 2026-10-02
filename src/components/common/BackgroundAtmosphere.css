@@ -1,0 +1,115 @@
+.cinematic-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.atmosphere-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0.95;
+}
+
+/* Hide particle network on mobile screens (display on desktop only) */
+@media (max-width: 960px) {
+  .atmosphere-canvas {
+    display: none !important;
+  }
+}
+
+/* Dynamic Aurora Orbs */
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform, opacity;
+  animation: floatOrb 22s infinite ease-in-out alternate;
+  z-index: 1;
+}
+
+.aurora-1 {
+  width: 700px;
+  height: 700px;
+  top: -140px;
+  right: -120px;
+  animation-duration: 22s;
+}
+
+.aurora-2 {
+  width: 620px;
+  height: 620px;
+  bottom: -180px;
+  left: -120px;
+  animation-duration: 26s;
+  animation-delay: -5s;
+}
+
+.aurora-3 {
+  width: 520px;
+  height: 520px;
+  top: 35%;
+  left: 28%;
+  animation-duration: 30s;
+  animation-delay: -10s;
+}
+
+.aurora-4 {
+  width: 480px;
+  height: 480px;
+  bottom: 20%;
+  right: 15%;
+  animation-duration: 24s;
+  animation-delay: -15s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(75px, 50px) scale(1.2);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50px, 80px) scale(0.88);
+    opacity: 0.72;
+  }
+}
+
+/* Cyber grid pattern */
+.cyber-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 88%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 88%);
+  z-index: 1;
+}
+
+.light .cyber-grid-overlay {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+}
+
+/* Cinematic Edge Vignette */
+.cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.6);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.light .cinematic-vignette {
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.04);
+}
