@@ -67,7 +67,7 @@ const VCardHome = ({ selectedColor }) => {
 
       {/* Biography Paragraphs */}
       <div className="vcard-bio-block">
-       <p className="bio-lead-text">Hello! I am <strong>Saurabh Kedarkar</strong>, a <strong>Full-Stack Developer & WordPress Specialist</strong> with <strong>3+ years of experience</strong> building scalable, high-performance digital experiences. I focus on creating modern, responsive, and business-driven web solutions that combine clean development with great user experiences.</p>
+       <p className="bio-lead-text">Hello! I am <strong>Saurabh Kedarkar</strong>, a <strong>Web Developer & WordPress Specialist</strong> with <strong>3+ years of experience</strong> building scalable, high-performance digital experiences. I focus on creating modern, responsive, and business-driven web solutions that combine clean development with great user experiences.</p>
 
        <p className="bio-lead-text">I specialize in <strong>WordPress, PHP, React.js, Next.js, JavaScript, WooCommerce, and custom theme & plugin development</strong>. From custom WordPress platforms and e-commerce websites to modern React applications, I transform complex requirements into <strong>clean, fast, scalable, and user-friendly digital products.</strong></p>
 

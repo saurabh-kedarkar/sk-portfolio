@@ -18,13 +18,16 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
     };
     window.addEventListener("resize", handleResize);
 
-    // Particles configuration - Perfect balance (115-135 count, dedicated top-gap constellation)
-    const particleCount = Math.max(115, Math.min(Math.floor((width * height) / 11000), 140));
+    const isMobile = width < 768 || (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+
+    // Dynamic particle count: 35 for mobile (lightweight), 75 for desktop (super fast 60fps)
+    const particleCount = isMobile ? 35 : Math.max(50, Math.min(Math.floor((width * height) / 16000), 75));
     const particles = [];
     const shootingStars = [];
-    const mouse = { x: -1000, y: -1000, radius: 150 };
+    const mouse = { x: -1000, y: -1000, radius: isMobile ? 0 : 130 };
 
     const handleMouseMove = (e) => {
+      if (isMobile) return;
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
@@ -34,23 +37,24 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
       mouse.y = -1000;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseleave", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+      window.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    }
 
-    // 1. DEDICATED ANCHORED CONSTELLATION CLUSTER IN TOP OPEN GAP (Guaranteed on page refresh)
-    const topGapCount = 22;
+    // 1. Constellation Cluster
+    const topGapCount = isMobile ? 8 : 14;
     for (let i = 0; i < topGapCount; i++) {
       const isGlowingNode = i % 4 === 0;
-      // Spread across x: 18% to 82% of screen width, y: 25px to 38% of height
-      const colPos = 0.18 + ((i % 6) / 5) * 0.64 + (Math.random() * 0.06 - 0.03);
-      const rowPos = 0.05 + (Math.floor(i / 6) / 3) * 0.32 + (Math.random() * 0.05 - 0.025);
+      const colPos = 0.18 + ((i % 5) / 4) * 0.64 + (Math.random() * 0.06 - 0.03);
+      const rowPos = 0.05 + (Math.floor(i / 5) / 3) * 0.32 + (Math.random() * 0.05 - 0.025);
 
       particles.push({
         x: Math.max(20, Math.min(width - 20, colPos * width)),
         y: Math.max(20, Math.min(height * 0.40, rowPos * height)),
-        vx: (Math.random() - 0.5) * (isGlowingNode ? 0.38 : 0.24),
-        vy: (Math.random() - 0.5) * (isGlowingNode ? 0.38 : 0.24),
-        radius: isGlowingNode ? Math.random() * 2.4 + 1.8 : Math.random() * 1.6 + 0.8,
+        vx: (Math.random() - 0.5) * (isGlowingNode ? 0.35 : 0.2),
+        vy: (Math.random() - 0.5) * (isGlowingNode ? 0.35 : 0.2),
+        radius: isGlowingNode ? Math.random() * 2.0 + 1.5 : Math.random() * 1.4 + 0.7,
         alpha: Math.random() * 0.35 + 0.55,
         pulseSpeed: Math.random() * 0.03 + 0.015,
         isGlowingNode,
@@ -58,10 +62,10 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
       });
     }
 
-    // 2. Full-Screen Grid Distribution for the remaining particles
+    // 2. Grid Distribution
     const bodyCount = particleCount - topGapCount;
-    const rows = 4;
-    const cols = 6;
+    const rows = 3;
+    const cols = 5;
     const cellW = width / cols;
     const cellH = height / rows;
 
@@ -76,9 +80,9 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
       particles.push({
         x: Math.max(15, Math.min(width - 15, x)),
         y: Math.max(15, Math.min(height - 15, y)),
-        vx: (Math.random() - 0.5) * (isGlowingNode ? 0.45 : 0.28),
-        vy: (Math.random() - 0.5) * (isGlowingNode ? 0.45 : 0.28),
-        radius: isGlowingNode ? Math.random() * 2.2 + 1.6 : Math.random() * 1.5 + 0.7,
+        vx: (Math.random() - 0.5) * (isGlowingNode ? 0.4 : 0.25),
+        vy: (Math.random() - 0.5) * (isGlowingNode ? 0.4 : 0.25),
+        radius: isGlowingNode ? Math.random() * 2.0 + 1.4 : Math.random() * 1.3 + 0.6,
         alpha: Math.random() * 0.4 + 0.45,
         pulseSpeed: Math.random() * 0.03 + 0.01,
         isGlowingNode,
@@ -86,34 +90,39 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
       });
     }
 
-    // Helper function to spawn shooting stars through top gap
+    // Helper for shooting stars
     const spawnShootingStar = () => {
-      if (shootingStars.length >= 3) return;
+      if (shootingStars.length >= (isMobile ? 1 : 2)) return;
       shootingStars.push({
         x: Math.random() * width * 0.65 + width * 0.15,
         y: Math.random() * height * 0.25 + 20,
-        length: Math.random() * 90 + 55,
-        speed: Math.random() * 6.5 + 4.2,
-        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.2, // ~45 deg
-        alpha: 0.95,
-        decay: Math.random() * 0.02 + 0.014,
+        length: Math.random() * 70 + 45,
+        speed: Math.random() * 6.0 + 4.0,
+        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.2,
+        alpha: 0.9,
+        decay: Math.random() * 0.025 + 0.015,
       });
     };
 
-    // Instant shooting star spawn on refresh across top space
     spawnShootingStar();
-    setTimeout(spawnShootingStar, 300);
-
     const starInterval = setInterval(() => {
-      if (Math.random() > 0.35) {
+      if (!document.hidden && Math.random() > 0.4) {
         spawnShootingStar();
       }
-    }, 3500);
+    }, 4500);
+
+    const connectDistance = isMobile ? 90 : 115;
+    const connectDistanceSq = connectDistance * connectDistance;
 
     const render = () => {
+      if (document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Render shooting stars
+      // 1. Shooting stars
       for (let i = shootingStars.length - 1; i >= 0; i--) {
         const star = shootingStars[i];
         star.x += Math.cos(star.angle) * star.speed;
@@ -131,85 +140,85 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
         const tailY = star.y - Math.sin(star.angle) * star.length;
 
         const grad = ctx.createLinearGradient(headX, headY, tailX, tailY);
-        grad.addColorStop(0, selectedColor ? `${selectedColor}` : "rgba(6,182,212,0.9)");
+        grad.addColorStop(0, selectedColor || "rgba(6,182,212,0.9)");
         grad.addColorStop(1, "rgba(255,255,255,0)");
 
         ctx.beginPath();
         ctx.moveTo(headX, headY);
         ctx.lineTo(tailX, tailY);
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.6;
+        ctx.lineWidth = 1.4;
         ctx.stroke();
       }
 
       // 2. Particle update & draw
-      for (let i = 0; i < particles.length; i++) {
+      const now = Date.now();
+      const pLen = particles.length;
+
+      for (let i = 0; i < pLen; i++) {
         const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
 
-        // Smooth boundary wrap (Keep top gap particles smoothly floating in top 40% area)
         if (p.x < 0) p.x = width;
         if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = p.isTopGap ? height * 0.40 : height;
         if (p.y > height) p.y = 0;
 
-        // Subtle alpha pulsing
-        p.alpha += Math.sin(Date.now() * 0.002 * p.pulseSpeed) * 0.004;
-        p.alpha = Math.max(0.3, Math.min(0.9, p.alpha));
+        p.alpha += Math.sin(now * 0.002 * p.pulseSpeed) * 0.003;
+        p.alpha = Math.max(0.3, Math.min(0.85, p.alpha));
 
-        // Interactive mouse effect
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          p.x -= (dx / dist) * force * 2.0;
-          p.y -= (dy / dist) * force * 2.0;
+        // Interactive mouse effect (Desktop only)
+        if (!isMobile && mouse.radius > 0) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < mouse.radius * mouse.radius) {
+            const dist = Math.sqrt(distSq);
+            const force = (mouse.radius - dist) / mouse.radius;
+            p.x -= (dx / (dist || 1)) * force * 1.8;
+            p.y -= (dy / (dist || 1)) * force * 1.8;
 
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = selectedColor ? `${selectedColor}${Math.floor(force * 60).toString(16).padStart(2, '0')}` : `rgba(6,182,212,${force * 0.3})`;
-          ctx.lineWidth = 0.7;
-          ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = selectedColor ? `${selectedColor}${Math.floor(force * 50).toString(16).padStart(2, '0')}` : `rgba(6,182,212,${force * 0.25})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-
-        if (p.isGlowingNode) {
-          ctx.fillStyle = selectedColor || "#06b6d4";
-          ctx.shadowBlur = 9;
-          ctx.shadowColor = selectedColor || "#06b6d4";
-        } else {
-          ctx.fillStyle = isDarkMode
-            ? `rgba(255, 255, 255, ${p.alpha * 0.75})`
-            : `rgba(15, 23, 42, ${p.alpha * 0.5})`;
-          ctx.shadowBlur = 0;
-        }
+        ctx.fillStyle = p.isGlowingNode
+          ? (selectedColor || "#06b6d4")
+          : (isDarkMode ? `rgba(255, 255, 255, ${p.alpha * 0.7})` : `rgba(15, 23, 42, ${p.alpha * 0.45})`);
         ctx.fill();
 
-        // Connect nearby particles (Balanced constellation distance: 125px, clean opacity 0.22)
-        const connectDistance = 125;
-        for (let j = i + 1; j < particles.length; j++) {
+        // Connect nearby particles using fast squared distance check
+        for (let j = i + 1; j < pLen; j++) {
           const p2 = particles[j];
-          const distNodes = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (distNodes < connectDistance) {
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq < connectDistanceSq) {
+            const distNodes = Math.sqrt(distSq);
+            const lineAlpha = (1 - distNodes / connectDistance) * 0.2;
+
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            const lineAlpha = (1 - distNodes / connectDistance) * 0.22;
 
             if (p.isGlowingNode || p2.isGlowingNode) {
-              ctx.strokeStyle = selectedColor ? `${selectedColor}${Math.floor(lineAlpha * 240).toString(16).padStart(2, '0')}` : `rgba(6, 182, 212, ${lineAlpha})`;
+              ctx.strokeStyle = selectedColor ? `${selectedColor}${Math.floor(lineAlpha * 220).toString(16).padStart(2, '0')}` : `rgba(6, 182, 212, ${lineAlpha})`;
             } else {
               ctx.strokeStyle = isDarkMode
                 ? `rgba(255, 255, 255, ${lineAlpha})`
                 : `rgba(15, 23, 42, ${lineAlpha})`;
             }
 
-            ctx.lineWidth = 0.7;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
@@ -224,8 +233,10 @@ const BackgroundAtmosphere = ({ selectedColor, isDarkMode }) => {
       cancelAnimationFrame(animationFrameId);
       clearInterval(starInterval);
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseLeave);
+      if (!isMobile) {
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseleave", handleMouseLeave);
+      }
     };
   }, [isDarkMode, selectedColor]);
 

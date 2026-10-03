@@ -25,7 +25,7 @@ export const portfolioInfo = {
   description:
     "Passionate Web Developer with 2+ years of professional experience building high-performance web applications, custom WordPress ecosystems, and intuitive digital experiences. Dedicated to clean code, robust architecture, and 40%+ performance gains.",
   avatar:
-    "https://res.cloudinary.com/dqlvyzz4i/image/upload/v1762356770/WhatsApp_Image_2025-11-05_at_15.31.51_cf9d4bb9_aho1lg.jpg",
+    "https://res.cloudinary.com/dqlvyzz4i/image/upload/f_auto,q_auto,w_500/v1762356770/WhatsApp_Image_2025-11-05_at_15.31.51_cf9d4bb9_aho1lg.jpg",
   cvLink: "#",
   stats: [
     {

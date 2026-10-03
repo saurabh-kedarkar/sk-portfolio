@@ -1,33 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./CustomCursor.css";
 
 const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [trail, setTrail] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const crosshairRef = useRef(null);
+  const auraRef = useRef(null);
+
+  const posRef = useRef({ x: -100, y: -100 });
+  const rafRef = useRef(null);
 
   useEffect(() => {
-    // If classic system arrow is chosen, do not render custom cursor overlays
+    // Check if touch device
+    const touch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+    if (touch) {
+      setIsTouchDevice(true);
+      return;
+    }
+
     if (cursorStyle === "classic-arrow") return;
 
-    // Only enable on non-touch devices
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    if (isTouch) return;
+    const updateDOMPosition = () => {
+      const { x, y } = posRef.current;
+      const transformStr = `translate3d(${x}px, ${y}px, 0)`;
+
+      if (dotRef.current) dotRef.current.style.transform = transformStr;
+      if (ringRef.current) ringRef.current.style.transform = transformStr;
+      if (crosshairRef.current) crosshairRef.current.style.transform = transformStr;
+      if (auraRef.current) auraRef.current.style.transform = transformStr;
+    };
 
     const handleMouseMove = (e) => {
-      const newPos = { x: e.clientX, y: e.clientY };
-      setPos(newPos);
+      posRef.current = { x: e.clientX, y: e.clientY };
 
       if (!isVisible) setIsVisible(true);
 
-      // Maintain trail history for sparkle/trail mode
-      if (cursorStyle === "trail-sparkle") {
-        setTrail((prev) => [
-          { x: e.clientX, y: e.clientY, id: Math.random(), size: Math.random() * 8 + 4 },
-          ...prev.slice(0, 10),
-        ]);
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(() => {
+          updateDOMPosition();
+          rafRef.current = null;
+        });
       }
     };
 
@@ -55,14 +72,15 @@ const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", checkHoverable);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseover", checkHoverable, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    document.addEventListener("mouseenter", handleMouseEnter, { passive: true });
 
     return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", checkHoverable);
       window.removeEventListener("mousedown", handleMouseDown);
@@ -72,8 +90,7 @@ const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
     };
   }, [isVisible, cursorStyle]);
 
-  // If classic arrow mode is active or offscreen, return null
-  if (cursorStyle === "classic-arrow" || !isVisible) return null;
+  if (isTouchDevice || cursorStyle === "classic-arrow" || !isVisible) return null;
 
   return (
     <div className="custom-cursor-layer" aria-hidden="true">
@@ -81,21 +98,21 @@ const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
       {cursorStyle === "glow-dot" && (
         <>
           <div
+            ref={dotRef}
             className={`cursor-dot ${isHovered ? "hovered" : ""} ${
               isClicking ? "clicked" : ""
             }`}
             style={{
-              transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
               backgroundColor: selectedColor,
               color: selectedColor,
             }}
           />
           <div
+            ref={ringRef}
             className={`cursor-ring ${isHovered ? "hovered" : ""} ${
               isClicking ? "clicked" : ""
             }`}
             style={{
-              transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
               borderColor: selectedColor,
             }}
           />
@@ -105,11 +122,11 @@ const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
       {/* 2. Cyber Crosshair */}
       {cursorStyle === "cyber-crosshair" && (
         <div
+          ref={crosshairRef}
           className={`cursor-crosshair-wrap ${isHovered ? "hovered" : ""} ${
             isClicking ? "clicked" : ""
           }`}
           style={{
-            transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
             color: selectedColor,
           }}
         >
@@ -128,17 +145,17 @@ const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
       {cursorStyle === "magnet-ring" && (
         <>
           <div
+            ref={auraRef}
             className={`cursor-magnet-aura ${isHovered ? "hovered" : ""}`}
             style={{
-              transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
               background: `radial-gradient(circle, ${selectedColor}bb 0%, ${selectedColor}22 60%, transparent 100%)`,
               boxShadow: `0 0 25px ${selectedColor}`,
             }}
           />
           <div
+            ref={dotRef}
             className="cursor-dot"
             style={{
-              transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
               backgroundColor: "#ffffff",
               color: selectedColor,
             }}
@@ -146,37 +163,16 @@ const CustomCursor = ({ selectedColor, cursorStyle = "glow-dot" }) => {
         </>
       )}
 
-      {/* 4. Particle Trail Sparkle */}
+      {/* 4. Particle Trail Sparkle / Fallback Dot */}
       {cursorStyle === "trail-sparkle" && (
-        <>
-          <div
-            className="cursor-dot hovered"
-            style={{
-              transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
-              backgroundColor: selectedColor,
-              color: selectedColor,
-            }}
-          />
-          {trail.map((t, idx) => {
-            const alpha = (10 - idx) / 10;
-            return (
-              <div
-                key={t.id}
-                className="trail-sparkle-dot"
-                style={{
-                  width: `${t.size * alpha}px`,
-                  height: `${t.size * alpha}px`,
-                  marginTop: `-${(t.size * alpha) / 2}px`,
-                  marginLeft: `-${(t.size * alpha) / 2}px`,
-                  transform: `translate3d(${t.x}px, ${t.y}px, 0)`,
-                  backgroundColor: selectedColor,
-                  color: selectedColor,
-                  opacity: alpha * 0.75,
-                }}
-              />
-            );
-          })}
-        </>
+        <div
+          ref={dotRef}
+          className="cursor-dot hovered"
+          style={{
+            backgroundColor: selectedColor,
+            color: selectedColor,
+          }}
+        />
       )}
     </div>
   );

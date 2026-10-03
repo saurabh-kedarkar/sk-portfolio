@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,17 +13,25 @@ import LeftProfileCard from "./vcard/LeftProfileCard";
 import TopFloatingNav from "./vcard/TopFloatingNav";
 import MobileTopBar from "./vcard/MobileTopBar";
 import MobileBottomNav from "./vcard/MobileBottomNav";
-import CommandPalette from "./vcard/CommandPalette";
 import VCardHome from "./vcard/VCardHome";
-import VCardResume from "./vcard/VCardResume";
-import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import ContactUser from "./pages/ContactUser";
 import NotFound from "./NotFound";
 import BackgroundAtmosphere from "./common/BackgroundAtmosphere";
 import CustomCursor from "./common/CustomCursor";
+
+// Code-splitting lazy loaded page components
+const VCardResume = lazy(() => import("./vcard/VCardResume"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Blog = lazy(() => import("./pages/Blog"));
+const ContactUser = lazy(() => import("./pages/ContactUser"));
+const CommandPalette = lazy(() => import("./vcard/CommandPalette"));
+
+const RouteLoader = () => (
+  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "280px" }}>
+    <div style={{ width: "28px", height: "28px", borderRadius: "50%", border: "2px solid rgba(255,255,255,0.1)", borderTopColor: "var(--primary-color)", animation: "spin 0.8s linear infinite" }} />
+  </div>
+);
 
 const hexToRgb = (hex) => {
   let c = hex.replace("#", "");
@@ -185,59 +193,61 @@ const AppContent = () => {
             />
 
             <main className="vcard-main-card">
-              <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
-                  {/* Home Tab */}
-                  <Route
-                    path="/"
-                    element={<VCardHome selectedColor={selectedColor} />}
-                  />
-                  <Route
-                    path="/about"
-                    element={<VCardHome selectedColor={selectedColor} />}
-                  />
-                  {/* Experience Tab (/experience) */}
-                  <Route
-                    path="/experience"
-                    element={<VCardResume selectedColor={selectedColor} />}
-                  />
-                  <Route
-                    path="/resume"
-                    element={<VCardResume selectedColor={selectedColor} />}
-                  />
-                  {/* Skills Tab (/skills) */}
-                  <Route
-                    path="/skills"
-                    element={<Skills selectedColor={selectedColor} />}
-                  />
-                  {/* Projects Page (/projects - accessible via URL, hidden from main menu) */}
-                  <Route
-                    path="/projects"
-                    element={<Projects selectedColor={selectedColor} />}
-                  />
-                  {/* Blog Tab */}
-                  <Route
-                    path="/blog"
-                    element={<Blog selectedColor={selectedColor} />}
-                  />
-                  {/* Contact Tab */}
-                  <Route
-                    path="/contact"
-                    element={<Contact selectedColor={selectedColor} />}
-                  />
-                  {/* Contact Submissions Inbox Subpage */}
-                  <Route
-                    path="/get-contact"
-                    element={<ContactUser selectedColor={selectedColor} />}
-                  />
-                  <Route
-                    path="/contact-user"
-                    element={<ContactUser selectedColor={selectedColor} />}
-                  />
-                  {/* 404 Fallback */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </AnimatePresence>
+              <Suspense fallback={<RouteLoader />}>
+                <AnimatePresence mode="wait">
+                  <Routes location={location} key={location.pathname}>
+                    {/* Home Tab */}
+                    <Route
+                      path="/"
+                      element={<VCardHome selectedColor={selectedColor} />}
+                    />
+                    <Route
+                      path="/about"
+                      element={<VCardHome selectedColor={selectedColor} />}
+                    />
+                    {/* Experience Tab (/experience) */}
+                    <Route
+                      path="/experience"
+                      element={<VCardResume selectedColor={selectedColor} />}
+                    />
+                    <Route
+                      path="/resume"
+                      element={<VCardResume selectedColor={selectedColor} />}
+                    />
+                    {/* Skills Tab (/skills) */}
+                    <Route
+                      path="/skills"
+                      element={<Skills selectedColor={selectedColor} />}
+                    />
+                    {/* Projects Page (/projects - accessible via URL, hidden from main menu) */}
+                    <Route
+                      path="/projects"
+                      element={<Projects selectedColor={selectedColor} />}
+                    />
+                    {/* Blog Tab */}
+                    <Route
+                      path="/blog"
+                      element={<Blog selectedColor={selectedColor} />}
+                    />
+                    {/* Contact Tab */}
+                    <Route
+                      path="/contact"
+                      element={<Contact selectedColor={selectedColor} />}
+                    />
+                    {/* Contact Submissions Inbox Subpage */}
+                    <Route
+                      path="/get-contact"
+                      element={<ContactUser selectedColor={selectedColor} />}
+                    />
+                    <Route
+                      path="/contact-user"
+                      element={<ContactUser selectedColor={selectedColor} />}
+                    />
+                    {/* 404 Fallback */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </AnimatePresence>
+              </Suspense>
             </main>
           </div>
         </div>
@@ -247,11 +257,15 @@ const AppContent = () => {
       <MobileBottomNav selectedColor={selectedColor} />
 
       {/* Global Command Palette Modal (Ctrl+K / ⌘K) */}
-      <CommandPalette
-        isOpen={isCommandOpen}
-        onClose={() => setIsCommandOpen(false)}
-        selectedColor={selectedColor}
-      />
+      <Suspense fallback={null}>
+        {isCommandOpen && (
+          <CommandPalette
+            isOpen={isCommandOpen}
+            onClose={() => setIsCommandOpen(false)}
+            selectedColor={selectedColor}
+          />
+        )}
+      </Suspense>
     </div>
   );
 };
