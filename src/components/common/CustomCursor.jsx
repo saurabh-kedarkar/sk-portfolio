@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import "./CustomCursor.css";
 
 const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   // Target mouse position
   const mouseRef = useRef({ x: -100, y: -100 });
-  // Lerped smooth positions
-  const posRef = useRef({ x: -100, y: -100 }); // Fast dot
-  const trailPosRef = useRef({ x: -100, y: -100 }); // Smooth trailing ring/aura
+  const posRef = useRef({ x: -100, y: -100 });
+  const trailPosRef = useRef({ x: -100, y: -100 });
 
   const dotRef = useRef(null);
   const ringRef = useRef(null);
@@ -19,7 +19,6 @@ const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) =
   const auraRef = useRef(null);
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
-
   const rafRef = useRef(null);
 
   useEffect(() => {
@@ -31,14 +30,17 @@ const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) =
     }
 
     if (cursorStyle === "classic-arrow") {
+      document.documentElement.classList.remove("custom-cursor-active");
       document.body.classList.remove("custom-cursor-active");
       return;
     }
+
+    document.documentElement.classList.add("custom-cursor-active");
     document.body.classList.add("custom-cursor-active");
 
-    const handleMouseMove = (e) => {
+    const handlePointerMove = (e) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
 
       // Emitting particles for Sparkle Trail cursor
       if (cursorStyle === "trail-sparkle") {
@@ -67,44 +69,33 @@ const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) =
 
     const checkHoverable = (e) => {
       const target = e.target;
-      if (
-        target &&
-        (target.closest("button") ||
-          target.closest("a") ||
-          target.closest("input") ||
-          target.closest("textarea") ||
-          target.closest(".interactive") ||
-          target.closest(".project-card") ||
-          target.closest(".skill-card") ||
-          target.closest(".service-box") ||
-          target.closest(".vcard-tab-item") ||
-          target.closest(".scramble-text-wrapper") ||
-          target.closest("[role='button']"))
-      ) {
-        setIsHovered(true);
-      } else {
-        setIsHovered(false);
-      }
+      if (!target || typeof target.closest !== "function") return;
+
+      const isInteractive = Boolean(
+        target.closest(
+          "button, a, input, textarea, select, label, [role='button'], .interactive, .project-card, .skill-card, .service-box, .vcard-tab-item, .scramble-text-wrapper, .social-pill-btn, .filter-pill-btn, .quick-view-btn, .live-launch-btn, .cmd-palette-trigger, .system-circle-btn, .mobile-dock-item"
+        )
+      );
+      setIsHovered(isInteractive);
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("mouseover", checkHoverable, { passive: true });
     window.addEventListener("mousedown", handleMouseDown, { passive: true });
     window.addEventListener("mouseup", handleMouseUp, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
     document.addEventListener("mouseenter", handleMouseEnter, { passive: true });
 
-    // Animation Loop (60-120 FPS lerping)
+    // Animation Loop
     const animate = () => {
       const targetX = mouseRef.current.x;
       const targetY = mouseRef.current.y;
 
-      // Smooth lerp
-      posRef.current.x += (targetX - posRef.current.x) * 0.8;
-      posRef.current.y += (targetY - posRef.current.y) * 0.8;
+      posRef.current.x += (targetX - posRef.current.x) * 0.85;
+      posRef.current.y += (targetY - posRef.current.y) * 0.85;
 
-      trailPosRef.current.x += (targetX - trailPosRef.current.x) * 0.25;
-      trailPosRef.current.y += (targetY - trailPosRef.current.y) * 0.25;
+      trailPosRef.current.x += (targetX - trailPosRef.current.x) * 0.3;
+      trailPosRef.current.y += (targetY - trailPosRef.current.y) * 0.3;
 
       const fastTransform = `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0)`;
       const trailTransform = `translate3d(${trailPosRef.current.x}px, ${trailPosRef.current.y}px, 0)`;
@@ -114,7 +105,6 @@ const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) =
       if (crosshairRef.current) crosshairRef.current.style.transform = trailTransform;
       if (auraRef.current) auraRef.current.style.transform = trailTransform;
 
-      // Particle Trail Canvas Render
       if (cursorStyle === "trail-sparkle" && canvasRef.current) {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
@@ -151,28 +141,27 @@ const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) =
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    // Instant initial sync position
-    posRef.current = { ...mouseRef.current };
-    trailPosRef.current = { ...mouseRef.current };
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("mouseover", checkHoverable);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
+      document.documentElement.classList.remove("custom-cursor-active");
       document.body.classList.remove("custom-cursor-active");
     };
-  }, [isVisible, cursorStyle, selectedColor]);
+  }, [cursorStyle, selectedColor]);
 
   if (isTouchDevice || cursorStyle === "classic-arrow" || !isVisible) return null;
+  if (typeof document === "undefined") return null;
 
-  return (
+  const cursorContent = (
     <div className="custom-cursor-layer" aria-hidden="true">
-      {/* 1. Default Glow Dot & Ring */}
+      {/* 1. Glow Dot & Ring */}
       {cursorStyle === "glow-dot" && (
         <>
           <div
@@ -239,6 +228,8 @@ const CustomCursor = ({ selectedColor = "#06b6d4", cursorStyle = "glow-dot" }) =
       )}
     </div>
   );
+
+  return createPortal(cursorContent, document.body);
 };
 
 export default CustomCursor;
