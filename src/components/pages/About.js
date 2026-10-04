@@ -13,6 +13,7 @@ import { HiSparkles } from "react-icons/hi2";
 import "../../styles/pages/About.css";
 import { aboutInfo } from "../../data/about";
 import { sound } from "../../utils/sound";
+import ScrambleText from "../common/ScrambleText";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -48,7 +49,9 @@ const About = ({ selectedColor }) => {
             <HiSparkles />
             <span>{aboutInfo.badge || "01 // ABOUT ME"}</span>
           </div>
-          <h1 className="page-title">{aboutInfo.title}</h1>
+          <h1 className="page-title">
+            <ScrambleText text={aboutInfo.title || "About Me"} speed={30} />
+          </h1>
           <p className="page-subtitle">{aboutInfo.subtitle}</p>
         </motion.div>
 

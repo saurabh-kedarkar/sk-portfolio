@@ -15,17 +15,14 @@ const ScrambleText = ({
   style = {},
 }) => {
   const [displayText, setDisplayText] = useState(text);
-  const isScramblingRef = useRef(false);
   const frameRef = useRef(null);
 
   const startScramble = () => {
-    if (isScramblingRef.current) return;
-    isScramblingRef.current = true;
+    if (!text) return;
+    if (frameRef.current) clearInterval(frameRef.current);
 
     let iteration = 0;
     const maxIterations = text.length;
-
-    if (frameRef.current) clearInterval(frameRef.current);
 
     if (audioFeedback) {
       sound.playDecryption();
@@ -47,7 +44,6 @@ const ScrambleText = ({
 
       if (iteration >= maxIterations) {
         clearInterval(frameRef.current);
-        isScramblingRef.current = false;
         setDisplayText(text);
       }
 

@@ -10,6 +10,7 @@ import {
 import { HiSparkles } from "react-icons/hi2";
 import "../../styles/pages/Blog.css";
 import { sound } from "../../utils/sound";
+import ScrambleText from "../common/ScrambleText";
 
 // Free Public Tech News API (DEV.to API - 100% Free, No Key Required, No CORS, Vercel Ready)
 const DEV_TO_API_URL = "https://dev.to/api/articles";
@@ -69,6 +70,8 @@ const Blog = ({ selectedColor }) => {
 
   useEffect(() => {
     const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2500); // 2.5s fast load timeout
+
     const fetchNews = async () => {
       setLoading(true);
       try {
@@ -84,10 +87,13 @@ const Blog = ({ selectedColor }) => {
           : `${DEV_TO_API_URL}?per_page=16`;
 
         const response = await fetch(endpoint, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
         if (!response.ok) {
           setArticles(DUMMY_ARTICLES);
           return;
         }
+
         const data = await response.json();
         if (Array.isArray(data) && data.length > 0) {
           const formatted = data.map((item) => ({
@@ -107,16 +113,17 @@ const Blog = ({ selectedColor }) => {
           setArticles(DUMMY_ARTICLES);
         }
       } catch (err) {
-        if (err.name !== "AbortError") {
-          setArticles(DUMMY_ARTICLES);
-        }
+        setArticles(DUMMY_ARTICLES);
       } finally {
         setLoading(false);
       }
     };
 
     fetchNews();
-    return () => controller.abort();
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, [activeCategory]);
 
   const handleCategoryChange = (cat) => {
@@ -146,7 +153,9 @@ const Blog = ({ selectedColor }) => {
             <HiSparkles />
             <span>04 // KNOWLEDGE & INSIGHTS</span>
           </div>
-          <h1 className="page-title">Articles & Insights</h1>
+          <h1 className="page-title">
+            <ScrambleText text="Articles & Insights" speed={30} />
+          </h1>
           <p className="page-subtitle">
             Real-time web development articles, engineering insights, and daily technology trends.
           </p>

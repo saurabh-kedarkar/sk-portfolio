@@ -22,6 +22,7 @@ import { contactInfo } from "../../data/contact";
 import { socialLinks } from "../../data/portfolio";
 import { sound } from "../../utils/sound";
 import { appendSubmissionToCsv } from "../../utils/csvStorage";
+import ScrambleText from "../common/ScrambleText";
 
 const Contact = ({ selectedColor }) => {
   const [copiedKey, setCopiedKey] = useState(null);
@@ -120,7 +121,9 @@ const Contact = ({ selectedColor }) => {
             <HiSparkles />
             <span>{contactInfo.badge || "05 // REACH OUT"}</span>
           </div>
-          <h1 className="page-title">{contactInfo.title}</h1>
+          <h1 className="page-title">
+            <ScrambleText text={contactInfo.title || "Get In Touch"} speed={30} />
+          </h1>
           <p className="page-subtitle">{contactInfo.subtitle}</p>
         </div>
 
@@ -134,7 +137,9 @@ const Contact = ({ selectedColor }) => {
                 <span className="live-dot" />
                 <span>Active Status</span>
               </div>
-              <h3 className="avail-title">Available for Projects & Roles</h3>
+              <h3 className="avail-title">
+                <ScrambleText text="Available for Projects & Roles" speed={30} />
+              </h3>
               <p className="avail-desc">
                 Based in Maharashtra, India. Open to remote contracts, full-time
                 positions, and high-impact freelance consulting.
@@ -248,7 +253,7 @@ const Contact = ({ selectedColor }) => {
                 <div className="channel-info">
                   <span className="channel-label">Location</span>
                   <span className="channel-val">
-                    Teosa, Amravati, Maharashtra, India
+                    Pune, Maharashtra, India
                   </span>
                 </div>
               </div>
@@ -286,7 +291,9 @@ const Contact = ({ selectedColor }) => {
                   <FiMessageSquare style={{ color: selectedColor }} />
                 </div>
                 <div>
-                  <h3 className="form-title">Send a Direct Message</h3>
+                  <h3 className="form-title">
+                    <ScrambleText text="Send a Direct Message" speed={30} />
+                  </h3>
                   <span className="form-subtitle">
                     Fill out the form below and I'll respond within 24 hours.
                   </span>

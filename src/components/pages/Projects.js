@@ -13,6 +13,7 @@ import { HiSparkles } from "react-icons/hi2";
 import "../../styles/pages/Projects.css";
 import { projectsInfo } from "../../data/projects";
 import { sound } from "../../utils/sound";
+import ScrambleText from "../common/ScrambleText";
 
 const Projects = ({ selectedColor }) => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -55,7 +56,9 @@ const Projects = ({ selectedColor }) => {
             <HiSparkles />
             <span>{projectsInfo.badge || "03 // SELECTED PORTFOLIO"}</span>
           </div>
-          <h1 className="page-title">{projectsInfo.title}</h1>
+          <h1 className="page-title">
+            <ScrambleText text={projectsInfo.title || "Selected Works"} speed={30} />
+          </h1>
           <p className="page-subtitle">{projectsInfo.subtitle}</p>
         </div>
 

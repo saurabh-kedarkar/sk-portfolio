@@ -67,7 +67,7 @@ const VCardHome = ({ selectedColor }) => {
 
       {/* Biography Paragraphs */}
       <div className="vcard-bio-block">
-       <p className="bio-lead-text">Hello! I am <strong>Saurabh Kedarkar</strong>, a <strong>Web Developer & WordPress Specialist</strong> with <strong>3+ years of experience</strong> building scalable, high-performance digital experiences. I focus on creating modern, responsive, and business-driven web solutions that combine clean development with great user experiences.</p>
+       <p className="bio-lead-text">Hello! I am <strong><ScrambleText text="Saurabh Kedarkar" speed={25} /></strong>, a <strong>Web Developer & WordPress Specialist</strong> with <strong>3+ years of experience</strong> building scalable, high-performance digital experiences. I focus on creating modern, responsive, and business-driven web solutions that combine clean development with great user experiences.</p>
 
        <p className="bio-lead-text">I specialize in <strong>WordPress, PHP, React.js, Next.js, JavaScript, WooCommerce, and custom theme & plugin development</strong>. From custom WordPress platforms and e-commerce websites to modern React applications, I transform complex requirements into <strong>clean, fast, scalable, and user-friendly digital products.</strong></p>
 
@@ -75,7 +75,9 @@ const VCardHome = ({ selectedColor }) => {
 
       {/* What I Do Section */}
       <div className="vcard-what-i-do-section">
-        <h2 className="what-i-do-heading">What I Do!</h2>
+        <h2 className="what-i-do-heading">
+          <ScrambleText text="What I Do!" speed={30} />
+        </h2>
         <div className="services-grid">
           {whatIDoList.map((item, idx) => (
             <Interactive3DCard
@@ -106,7 +108,9 @@ const VCardHome = ({ selectedColor }) => {
 
       {/* Key Impact Metrics Row */}
       <div className="vcard-metrics-section">
-        <h2 className="what-i-do-heading">Impact Highlights</h2>
+        <h2 className="what-i-do-heading">
+          <ScrambleText text="Impact Highlights" speed={30} />
+        </h2>
         <div className="vcard-metrics-grid">
           <div
             className="vcard-metric-card interactive"
@@ -116,7 +120,7 @@ const VCardHome = ({ selectedColor }) => {
               <FiBriefcase />
             </div>
             <div>
-              <span className="metric-num">2+ YRS</span>
+              <span className="metric-num">3+ YRS</span>
               <span className="metric-lbl">Industry Experience</span>
             </div>
           </div>
@@ -164,7 +168,9 @@ const VCardHome = ({ selectedColor }) => {
 
       {/* NEW FEATURE: Career Readiness & Availability Matrix */}
       <div className="vcard-availability-section">
-        <h2 className="what-i-do-heading">Work Readiness & Telemetry</h2>
+        <h2 className="what-i-do-heading">
+          <ScrambleText text="Work Readiness & Telemetry" speed={30} />
+        </h2>
         <div className="availability-bento-grid">
           <div
             className="avail-card interactive"
@@ -218,7 +224,9 @@ const VCardHome = ({ selectedColor }) => {
 
       {/* Engineering Pillars & Delivery Standards */}
       <div className="vcard-pillars-section">
-        <h2 className="what-i-do-heading">Engineering Standards</h2>
+        <h2 className="what-i-do-heading">
+          <ScrambleText text="Engineering Standards" speed={30} />
+        </h2>
         <div className="pillars-grid">
           <div
             className="pillar-item interactive"

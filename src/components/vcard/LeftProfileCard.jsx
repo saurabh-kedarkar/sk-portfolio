@@ -221,7 +221,7 @@ const LeftProfileCard = ({
         {/* Social Action Pills Row */}
         <div className="profile-social-row">
           <a
-            href="https://github.com/SaurabhKedarkar123"
+            href="https://github.com/saurabh-kedarkar"
             target="_blank"
             rel="noopener noreferrer"
             className="social-pill-btn interactive"
@@ -234,7 +234,7 @@ const LeftProfileCard = ({
           </a>
 
           <a
-            href="https://www.linkedin.com/in/saurabh-kedarkar-890288219/"
+            href="https://www.linkedin.com/in/saurabh-kedarkar"
             target="_blank"
             rel="noopener noreferrer"
             className="social-pill-btn interactive"
@@ -359,7 +359,7 @@ const LeftProfileCard = ({
             </div>
             <div className="info-texts">
               <span className="info-label">LOCATION</span>
-              <span className="info-val">Amravati & Pune, MH</span>
+              <span className="info-val">Pune, Maharashtra, India</span>
             </div>
           </div>
         </div>

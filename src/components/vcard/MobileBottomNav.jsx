@@ -1,4 +1,5 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -25,9 +26,13 @@ const MobileBottomNav = ({ selectedColor }) => {
   const handleTabClick = () => {
     sound.playClick();
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    const scrollContainer = document.querySelector(".portfolio-container");
+    if (scrollContainer) {
+      scrollContainer.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   };
 
-  return (
+  const navContent = (
     <nav className="mobile-bottom-nav-dock" aria-label="Mobile Bottom Navigation">
       <div className="mobile-bottom-nav-container">
         {navItems.map((item) => {
@@ -68,6 +73,9 @@ const MobileBottomNav = ({ selectedColor }) => {
       </div>
     </nav>
   );
+
+  if (typeof document === "undefined") return null;
+  return createPortal(navContent, document.body);
 };
 
 export default MobileBottomNav;

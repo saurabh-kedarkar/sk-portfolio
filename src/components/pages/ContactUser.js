@@ -23,6 +23,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import axios from "axios";
 import "../../styles/pages/ContactUser.css";
 import { sound } from "../../utils/sound";
+import ScrambleText from "../common/ScrambleText";
 import {
   fetchSubmissionsFromCsv,
   saveSubmissionsToCsv,
@@ -224,7 +225,9 @@ function ContactUser({ selectedColor }) {
             <HiSparkles />
             <span>06 // CSV INBOX & DATA RECORDS</span>
           </div>
-          <h1 className="page-title">Contact Submissions</h1>
+          <h1 className="page-title">
+            <ScrambleText text="Contact Submissions" speed={30} />
+          </h1>
           <p className="page-subtitle">
             Every contact form submission on <code>/contact</code> is automatically appended to your CSV data records and synchronized in real-time.
           </p>

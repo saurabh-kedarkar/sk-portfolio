@@ -33,9 +33,9 @@ export const contactInfo = {
     {
       title: "Location",
       titleIcon: "📍",
-      value: "Teosa, Amravati, Maharashtra, India",
+      value: "pune, Maharashtra, India",
       actionText: "Open in Google Maps",
-      actionUrl: "https://maps.google.com/?q=Teosa,+Amravati,+Maharashtra",
+      actionUrl: "https://maps.app.goo.gl/c2KJnMKB71VQmPps8",
       canCopy: false,
     },
   ],

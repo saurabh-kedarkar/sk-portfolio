@@ -22,6 +22,7 @@ import {
 import "../../styles/pages/Skills.css";
 import { skillsInfo } from "../../data/skills";
 import { sound } from "../../utils/sound";
+import ScrambleText from "../common/ScrambleText";
 
 // Map tech names to icons
 const getSkillIcon = (name) => {
@@ -58,7 +59,9 @@ const Skills = ({ selectedColor }) => {
             <HiSparkles />
             <span>{skillsInfo.badge || "03 // TECHNICAL EXPERTISE"}</span>
           </div>
-          <h1 className="page-title">{skillsInfo.title || "Skills & Arsenal"}</h1>
+          <h1 className="page-title">
+            <ScrambleText text={skillsInfo.title || "Skills & Arsenal"} speed={30} />
+          </h1>
           <p className="page-subtitle">
             {skillsInfo.subtitle || "Technologies, Frameworks & Tooling in My Daily Stack"}
           </p>
@@ -125,7 +128,9 @@ const Skills = ({ selectedColor }) => {
           <div className="pillars-header">
             <FiZap className="pillar-header-icon" style={{ color: selectedColor }} />
             <div>
-              <h2 className="pillars-title">Engineering Standards & Best Practices</h2>
+              <h2 className="pillars-title">
+                <ScrambleText text="Engineering Standards & Best Practices" speed={30} />
+              </h2>
               <span className="pillars-subtitle">
                 Core values integrated into every line of production code
               </span>

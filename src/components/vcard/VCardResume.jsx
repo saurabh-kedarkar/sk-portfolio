@@ -46,7 +46,9 @@ const VCardResume = ({ selectedColor }) => {
             >
               <FiBriefcase />
             </div>
-            <h2 className="col-header-title">Experience</h2>
+            <h2 className="col-header-title">
+              <ScrambleText text="Experience" speed={30} />
+            </h2>
           </div>
 
           <div className="timeline-cards-list">
@@ -91,7 +93,9 @@ const VCardResume = ({ selectedColor }) => {
             >
               <FiBookOpen />
             </div>
-            <h2 className="col-header-title">Education</h2>
+            <h2 className="col-header-title">
+              <ScrambleText text="Education" speed={30} />
+            </h2>
           </div>
 
           <div className="timeline-cards-list">
@@ -122,7 +126,7 @@ const VCardResume = ({ selectedColor }) => {
       {/* Interests Section */}
       <div className="vcard-interests-section">
         <h2 className="what-i-do-heading">
-          {aboutInfo.interests?.title || "Interests"}
+          <ScrambleText text={aboutInfo.interests?.title || "Interests"} speed={30} />
         </h2>
         <div className="vcard-interests-grid">
           {aboutInfo.interests?.interests?.map((item, idx) => (

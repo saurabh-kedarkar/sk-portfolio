@@ -3,5 +3,13 @@
   font-feature-settings: "tnum" 1;
   font-variant-numeric: tabular-nums;
   letter-spacing: inherit;
-  transition: color 0.2s ease;
+  color: inherit;
+  transition: text-shadow 0.25s ease, transform 0.2s ease;
+  cursor: pointer;
 }
+
+.scramble-text-wrapper:hover {
+  color: inherit;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
